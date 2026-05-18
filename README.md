@@ -2,79 +2,35 @@ Smart Home Energy Consumption System ⚡🏠
 
 A modern Streamlit dashboard for monitoring, analyzing, and predicting smart home energy consumption using a Data Lake Architecture approach.
 
-📌 Project Overview
+📌 Objectives:
+Monitor energy consumption
+Analyze device usage
+Predict future consumption
+Visualize smart home data
 
-This project is a Smart Home Energy Consumption Monitoring System built with Python and Streamlit.
 
-The system simulates:
-
-Smart home devices
-Energy monitoring
-Energy analytics
-AI prediction dashboards
-Data Lake architecture visualization
-
-The application provides an interactive UI for viewing:
-
-Energy usage
-Device analytics
-Predictions
-System architecture
-Data pipeline status
-
-🚀 Features
-🏠 Home Dashboard
-Daily energy usage
-Monthly cost
-Active devices
-System efficiency
-
-📈 Energy Analytics
-Daily consumption charts
-Peak usage analysis
-Energy distribution
-
-🔌 Smart Devices
+⚡ Features:
+Energy dashboard
 Device monitoring
-Device status tracking
-Device control simulation
-
-🤖 AI Predictions
-Energy forecasting
-Cost prediction
-Peak hour detection
+AI predictions
+Data Lake architecture
+Smart analytics
 
 
-🗂️ Data Lake Architecture
-ETL pipeline visualization
-Data storage layers
-Analytics structure
-⚙️ Settings
-Dark mode
-Notifications
-Alerts
+🛠️ Technologies:
+Python
+Streamlit
+Pandas
+NumPy
 
 
-🏗️ Architecture
+🏗️ Architecture:
 Smart Devices
-      ↓
 Data Ingestion
-      ↓
 Data Lake
-      ↓
-Processing & Analytics
-      ↓
-Machine Learning
-      ↓
+Analytics
 Streamlit Dashboard
-🛠️ Technologies Used
-Technology	Purpose
-Python	Main programming language
-Streamlit	Web dashboard
-Pandas	Data handling
-NumPy	Numerical operations
-Scikit-learn	Machine learning
-Plotly	Data visualization
+
 
 
 📂 Project Structure
@@ -91,6 +47,8 @@ smart-home-energy/
     ├── processed/
     ├── cleaned/
     └── analytics/
+
+    
 
     
 ▶️ Installation
@@ -112,15 +70,17 @@ Run the Streamlit application:
 streamlit run app.py
 
 
+
+
 📦 Requirements
 
 Create a requirements.txt file:
+streamlit.
+pandas.
+numpy.
+scikit-learn.
+plotly.
 
-streamlit
-pandas
-numpy
-scikit-learn
-plotly
 
 
 👩‍💻 Developer
