@@ -21,24 +21,30 @@ Device analytics
 Predictions
 System architecture
 Data pipeline status
+
 🚀 Features
 🏠 Home Dashboard
 Daily energy usage
 Monthly cost
 Active devices
 System efficiency
+
 📈 Energy Analytics
 Daily consumption charts
 Peak usage analysis
 Energy distribution
+
 🔌 Smart Devices
 Device monitoring
 Device status tracking
 Device control simulation
+
 🤖 AI Predictions
 Energy forecasting
 Cost prediction
 Peak hour detection
+
+
 🗂️ Data Lake Architecture
 ETL pipeline visualization
 Data storage layers
@@ -47,6 +53,8 @@ Analytics structure
 Dark mode
 Notifications
 Alerts
+
+
 🏗️ Architecture
 Smart Devices
       ↓
@@ -67,6 +75,8 @@ Pandas	Data handling
 NumPy	Numerical operations
 Scikit-learn	Machine learning
 Plotly	Data visualization
+
+
 📂 Project Structure
 smart-home-energy/
 │
@@ -81,6 +91,8 @@ smart-home-energy/
     ├── processed/
     ├── cleaned/
     └── analytics/
+
+    
 ▶️ Installation
 
 Clone the repository:
@@ -98,6 +110,8 @@ pip install -r requirements.txt
 Run the Streamlit application:
 
 streamlit run app.py
+
+
 📦 Requirements
 
 Create a requirements.txt file:
