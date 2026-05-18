@@ -1,55 +1,139 @@
-# app.py
 import streamlit as st
+import pandas as pd
+import numpy as np
 
-# ---------------- PAGE CONFIG ----------------
+# ---------------------------------------------------
+# PAGE CONFIG
+# ---------------------------------------------------
 
 st.set_page_config(
     page_title="Smart Home Energy",
     page_icon="⚡",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
-# ---------------- SIDEBAR ----------------
+# ---------------------------------------------------
+# CUSTOM CSS
+# ---------------------------------------------------
 
-st.sidebar.title("⚡ Smart Home Energy")
+st.markdown("""
+<style>
+
+.main {
+    background-color: #0F172A;
+    color: white;
+}
+
+section[data-testid="stSidebar"] {
+    background-color: #111827;
+}
+
+h1, h2, h3 {
+    color: #00E5FF;
+}
+
+div[data-testid="metric-container"] {
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.stButton>button {
+    background-color: #00E5FF;
+    color: black;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.stButton>button:hover {
+    background-color: #7C3AED;
+    color: white;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------
+
+st.sidebar.title("⚡ Smart Home")
+
 st.sidebar.markdown("---")
-
-st.sidebar.info(
-    "Smart Home Energy Consumption Dashboard"
-)
 
 page = st.sidebar.radio(
     "Navigation",
     [
         "Home",
         "Dashboard",
-        "Device Analytics",
+        "Devices",
         "Predictions",
         "Data Lake",
         "Settings"
     ]
 )
 
-# ---------------- HOME PAGE ----------------
+# ---------------------------------------------------
+# FAKE DATA
+# ---------------------------------------------------
+
+hours = np.arange(24)
+
+energy = np.random.randint(
+    20,
+    100,
+    size=24
+)
+
+df = pd.DataFrame({
+    "Hour": hours,
+    "Energy": energy
+})
+
+# ---------------------------------------------------
+# HOME PAGE
+# ---------------------------------------------------
 
 if page == "Home":
 
-    st.title("🏠 Smart Home Energy Consumption")
-    st.subheader("Data Lake Architecture System")
+    st.title("🏠 Smart Home Energy System")
+
+    st.subheader(
+        "Data Lake Architecture Dashboard"
+    )
 
     st.markdown("---")
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.metric("Today's Usage", "0 kWh")
+        st.metric(
+            "Today's Usage",
+            "145 kWh",
+            "+12%"
+        )
 
     with col2:
-        st.metric("Monthly Cost", "$0")
+        st.metric(
+            "Monthly Cost",
+            "$320",
+            "-5%"
+        )
 
     with col3:
-        st.metric("Active Devices", "0")
+        st.metric(
+            "Active Devices",
+            "12"
+        )
+
+    with col4:
+        st.metric(
+            "Efficiency",
+            "89%"
+        )
 
     st.markdown("---")
 
@@ -57,9 +141,9 @@ if page == "Home":
 
     st.info(
         """
-        This dashboard will monitor and analyze
-        smart home energy consumption using
-        Data Lake Architecture and Machine Learning.
+        This dashboard monitors smart home
+        energy consumption using Data Lake
+        Architecture and AI Analytics.
         """
     )
 
@@ -67,8 +151,7 @@ if page == "Home":
 
     st.header("⚙️ System Architecture")
 
-    st.code(
-        """
+    st.code("""
 Smart Devices
       ↓
 Data Ingestion
@@ -80,10 +163,11 @@ Processing & Analytics
 Machine Learning
       ↓
 Streamlit Dashboard
-        """
-    )
+""")
 
-# ---------------- DASHBOARD PAGE ----------------
+# ---------------------------------------------------
+# DASHBOARD PAGE
+# ---------------------------------------------------
 
 elif page == "Dashboard":
 
@@ -94,98 +178,151 @@ elif page == "Dashboard":
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("Daily Consumption")
-        st.empty()
+
+        st.subheader("Daily Energy Usage")
+
+        st.line_chart(
+            df.set_index("Hour")
+        )
 
     with col2:
-        st.subheader("Monthly Consumption")
-        st.empty()
+
+        st.subheader("Energy Distribution")
+
+        device_data = pd.DataFrame({
+            "Device": [
+                "AC",
+                "Lights",
+                "TV",
+                "Heater",
+                "Fridge"
+            ],
+            "Usage": [
+                40,
+                15,
+                10,
+                20,
+                15
+            ]
+        })
+
+        st.bar_chart(
+            device_data.set_index("Device")
+        )
 
     st.markdown("---")
 
     col3, col4 = st.columns(2)
 
     with col3:
-        st.subheader("Top Energy Devices")
-        st.empty()
+
+        st.subheader("Peak Usage Hours")
+
+        st.area_chart(
+            df.set_index("Hour")
+        )
 
     with col4:
-        st.subheader("Peak Usage Hours")
-        st.empty()
 
-# ---------------- DEVICE ANALYTICS ----------------
+        st.subheader("System Status")
 
-elif page == "Device Analytics":
+        st.success(
+            "All devices are working normally"
+        )
 
-    st.title("🔌 Device Analytics")
+        st.info(
+            "No unusual energy spikes detected"
+        )
 
-    devices = [
-        "Air Conditioner",
-        "Refrigerator",
-        "TV",
-        "Washing Machine",
-        "Lights",
-        "Heater"
-    ]
+# ---------------------------------------------------
+# DEVICES PAGE
+# ---------------------------------------------------
 
-    selected_device = st.selectbox(
-        "Choose Device",
-        devices
-    )
+elif page == "Devices":
 
-    st.markdown("---")
+    st.title("🔌 Smart Devices")
 
-    st.subheader(f"{selected_device} Analysis")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.metric("Current Usage", "0 W")
-
-    with col2:
-        st.metric("Daily Usage", "0 kWh")
-
-    with col3:
-        st.metric("Monthly Cost", "$0")
+    devices = {
+        "Air Conditioner": "ON",
+        "Lights": "ON",
+        "TV": "OFF",
+        "Heater": "ON",
+        "Refrigerator": "ON",
+        "Washing Machine": "OFF"
+    }
 
     st.markdown("---")
 
-    st.subheader("Consumption History")
-    st.empty()
+    for device, status in devices.items():
 
-# ---------------- PREDICTIONS PAGE ----------------
+        col1, col2, col3 = st.columns([3, 1, 1])
+
+        with col1:
+            st.subheader(device)
+
+        with col2:
+            st.write(f"Status: {status}")
+
+        with col3:
+            st.button(
+                "Control",
+                key=device
+            )
+
+        st.markdown("---")
+
+# ---------------------------------------------------
+# PREDICTIONS PAGE
+# ---------------------------------------------------
 
 elif page == "Predictions":
 
-    st.title("🤖 Energy Predictions")
+    st.title("🤖 AI Predictions")
 
-    prediction_type = st.selectbox(
-        "Prediction Type",
+    prediction = st.selectbox(
+        "Choose Prediction",
         [
-            "Tomorrow Consumption",
+            "Tomorrow Usage",
             "Monthly Forecast",
-            "Peak Usage Detection",
+            "Peak Hour Detection",
             "Cost Prediction"
         ]
     )
 
     st.markdown("---")
 
-    st.subheader("Prediction Results")
-    st.empty()
+    st.subheader("Prediction Result")
+
+    st.info(
+        "Predicted energy consumption tomorrow: 152 kWh"
+    )
 
     st.markdown("---")
 
-    st.subheader("Model Accuracy")
-    st.progress(0)
+    st.subheader("Forecast Chart")
 
-# ---------------- DATA LAKE PAGE ----------------
+    forecast = pd.DataFrame({
+        "Day": np.arange(1, 8),
+        "Prediction": np.random.randint(
+            120,
+            180,
+            7
+        )
+    })
+
+    st.line_chart(
+        forecast.set_index("Day")
+    )
+
+# ---------------------------------------------------
+# DATA LAKE PAGE
+# ---------------------------------------------------
 
 elif page == "Data Lake":
 
     st.title("🗂️ Data Lake")
 
-    st.subheader("Storage Layers")
+    st.markdown("---")
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -199,44 +336,44 @@ elif page == "Data Lake":
         st.warning("Cleaned Data")
 
     with col4:
-        st.error("Analytics Data")
-
-    st.markdown("---")
-
-    st.subheader("Uploaded Files")
-    st.empty()
+        st.error("Analytics")
 
     st.markdown("---")
 
     st.subheader("ETL Pipeline")
 
-    st.code(
-        """
+    st.code("""
 Extract → Transform → Load
-        """
-    )
+""")
 
-# ---------------- SETTINGS PAGE ----------------
+    st.markdown("---")
+
+    st.subheader("Pipeline Status")
+
+    st.progress(75)
+
+# ---------------------------------------------------
+# SETTINGS PAGE
+# ---------------------------------------------------
 
 elif page == "Settings":
 
     st.title("⚙️ Settings")
 
-    st.subheader("Theme")
+    dark_mode = st.toggle(
+        "Dark Mode",
+        value=True
+    )
 
-    theme = st.selectbox(
-        "Choose Theme",
-        ["Dark", "Light"]
+    alerts = st.toggle(
+        "Enable Alerts",
+        value=True
+    )
+
+    notifications = st.toggle(
+        "Push Notifications"
     )
 
     st.markdown("---")
-
-    st.subheader("Notifications")
-
-    st.toggle("Enable Alerts")
-
-    st.markdown("---")
-
-    st.subheader("System Status")
 
     st.success("System Ready")
